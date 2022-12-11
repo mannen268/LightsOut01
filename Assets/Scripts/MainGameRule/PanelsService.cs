@@ -10,16 +10,21 @@ public class PanelsService : PanelInterface
     public PanelsService(int panelSize, List<bool> question) {
         this.panelSize = panelSize;
         this.question = new List<bool>();
-        foreach (bool state in question) {
-            this.question.Add(state);
-        }
-        panels = new Panels(question);
+        SetQuestion(question);
     }
     public override void OnClicked(Vector2Int pos) {
         List<int> changedPoint = CalcChangedIndex(pos);
         foreach (var point in changedPoint) {
             panels.ReverseAt(point);
         }
+        Notify();
+    }
+    public override void SetQuestion(List<bool> question) {
+        this.question = new List<bool>();
+        foreach (bool state in question) {
+            this.question.Add(state);
+        }
+        panels = new Panels(question);
         Notify();
     }
     public override void ResetQuestion() {

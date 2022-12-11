@@ -12,6 +12,7 @@ public abstract class PanelInterface
         observers.Add(observer);
     }
     public abstract void OnClicked(Vector2Int pos);
+    public abstract void SetQuestion(List<bool> question);
     public abstract void ResetQuestion();
     public abstract bool GetState(Vector2Int pos);
     public abstract bool IsCleared();

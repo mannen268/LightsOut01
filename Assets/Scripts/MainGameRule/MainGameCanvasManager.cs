@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class MainGameCanvasManager : MonoBehaviour, ILevelSelectorObserver, IPanelOutput, IReturnTitleButtonObserver
+public class MainGameCanvasManager : MonoBehaviour, ILevelSelectObserver, IPanelOutput, IReturnTitleButtonObserver
 {
     [SerializeField]
     private GameObject titleCanvas;
@@ -13,17 +13,25 @@ public class MainGameCanvasManager : MonoBehaviour, ILevelSelectorObserver, IPan
     [SerializeField]
     private GameObject returnButton;
     private PanelInterface panelInterface;
-    void OnEnable() {
+    private LevelSelectButton.Level level = LevelSelectButton.Level.EASY;
+    void Awake() {
+        this.GetComponent<PanelFactory>().CreatePanelUI();
+        QuestionGeneratorFromFile generator = new QuestionGeneratorFromFile();
+        List<bool> question = generator.GetQuestion(level);
+        panelInterface = this.GetComponent<PanelFactory>().CreatePanelService(question);
         panelInterface.AddObserver(this);
         panelInterface.AddObserver(ClearCanvas.GetComponent<IPanelOutput>());
-    }
-    void Start() {
+        resetButton.GetComponent<ResetButton>().Init(panelInterface);
         returnButton.GetComponent<IReturnTitleButton>().AddObserver(this);
         returnButton.GetComponent<IReturnTitleButton>().AddObserver(titleCanvas.GetComponent<IReturnTitleButtonObserver>());
     }
-    public void Display(AbstractLevelSelector levelSelector) {
-        panelInterface = this.GetComponent<PanelFactory>().CreatePanels(levelSelector.GetQuestionPath());
-        resetButton.GetComponent<ResetButton>().Init(panelInterface);
+    void OnEnable() {
+        QuestionGeneratorFromFile generator = new QuestionGeneratorFromFile();
+        List<bool> question = generator.GetQuestion(level);
+        panelInterface.SetQuestion(question);
+    }
+    public void Display(LevelSelectButton.Level level) {
+        this.level = level;
         gameObject.SetActive(true);
     }
     public void Display(PanelInterface panelInterface) {
