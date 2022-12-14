@@ -12,22 +12,27 @@ public class MainGameCanvasManager : MonoBehaviour, ILevelSelectObserver, IPanel
     private GameObject resetButton;
     [SerializeField]
     private GameObject returnButton;
+    private PanelFactory panelFactory;
     private PanelInterface panelInterface;
+    private QuestionGeneratorFromFile questionGenerator;
     private LevelSelectButton.Level level = LevelSelectButton.Level.EASY;
     void Awake() {
-        this.GetComponent<PanelFactory>().CreatePanelUI();
-        QuestionGeneratorFromFile generator = new QuestionGeneratorFromFile();
-        List<bool> question = generator.GetQuestion(level);
-        panelInterface = this.GetComponent<PanelFactory>().CreatePanelService(question);
+        // Generate Question
+        questionGenerator = new QuestionGeneratorFromFile();
+        List<bool> question = questionGenerator.GetQuestion(level);
+        // Setup Panels
+        panelFactory = GetComponent<PanelFactory>();
+        panelFactory.CreatePanelUI();
+        panelInterface = panelFactory.CreatePanelService(question);
         panelInterface.AddObserver(this);
         panelInterface.AddObserver(ClearCanvas.GetComponent<IPanelOutput>());
+        // Setup UI button
         resetButton.GetComponent<ResetButton>().Init(panelInterface);
         returnButton.GetComponent<IReturnTitleButton>().AddObserver(this);
         returnButton.GetComponent<IReturnTitleButton>().AddObserver(titleCanvas.GetComponent<IReturnTitleButtonObserver>());
     }
     void OnEnable() {
-        QuestionGeneratorFromFile generator = new QuestionGeneratorFromFile();
-        List<bool> question = generator.GetQuestion(level);
+        List<bool> question = questionGenerator.GetQuestion(level);
         panelInterface.SetQuestion(question);
     }
     public void Display(LevelSelectButton.Level level) {

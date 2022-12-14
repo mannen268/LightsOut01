@@ -11,6 +11,11 @@ public abstract class PanelInterface
     public void AddObserver(IPanelOutput observer) {
         observers.Add(observer);
     }
+    protected void Notify() {
+        foreach (var observer in observers) {
+            observer.Display(this);
+        }
+    }
     public abstract void OnClicked(Vector2Int pos);
     public abstract void SetQuestion(List<bool> question);
     public abstract void ResetQuestion();

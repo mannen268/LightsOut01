@@ -1582,7 +1582,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e238b3eec48a3402387ff3517f2037ed, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  panelsSize: 5
+  panelDim: 5
   panelUIPrefab: {fileID: 7317563593713351603, guid: cfa84b6ba7a4d40b4b3e3889b97e8c51, type: 3}
 --- !u!114 &951134546
 MonoBehaviour:

@@ -37,11 +37,6 @@ public class PanelsService : PanelInterface
     public override bool IsCleared() {
         return panels.IsAllTrue();
     }
-    private void Notify() {
-        foreach (var observer in observers) {
-            observer.Display(this);
-        }
-    }
     private List<int> CalcChangedIndex(Vector2Int pos) {
         List<int> ans = new List<int>();
         List<Vector2Int> mutation = new List<Vector2Int>() { Vector2Int.zero, Vector2Int.up, Vector2Int.left, Vector2Int.right, Vector2Int.down };

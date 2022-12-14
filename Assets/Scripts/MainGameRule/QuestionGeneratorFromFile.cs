@@ -7,7 +7,7 @@ using System.Text;
 
 public class QuestionGeneratorFromFile
 {
-    private List<string> questionPathDict;
+    private readonly List<string> questionPathDict;
     public QuestionGeneratorFromFile() {
         questionPathDict = new List<string>() {
             "./question01.txt",
