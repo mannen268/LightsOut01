@@ -328,7 +328,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 249260005}
-        m_TargetAssemblyTypeName: LevelButton, MyProject
+        m_TargetAssemblyTypeName: LevelSelectButton, MyProject
         m_MethodName: OnClicked
         m_Mode: 1
         m_Arguments:
@@ -386,7 +386,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 249260000}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e9c5efb0fd7e74bf690e9d10c39b93e4, type: 3}
+  m_Script: {fileID: 11500000, guid: bcd8cddd7a505453bb5e7fb4e5133b3f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   level: 1
@@ -762,7 +762,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 543197853}
-        m_TargetAssemblyTypeName: LevelButton, MyProject
+        m_TargetAssemblyTypeName: LevelSelectButton, MyProject
         m_MethodName: OnClicked
         m_Mode: 1
         m_Arguments:
@@ -820,7 +820,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 543197848}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e9c5efb0fd7e74bf690e9d10c39b93e4, type: 3}
+  m_Script: {fileID: 11500000, guid: bcd8cddd7a505453bb5e7fb4e5133b3f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   level: 4
@@ -1121,7 +1121,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 682027706}
-        m_TargetAssemblyTypeName: LevelButton, MyProject
+        m_TargetAssemblyTypeName: LevelSelectButton, MyProject
         m_MethodName: OnClicked
         m_Mode: 1
         m_Arguments:
@@ -1179,7 +1179,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 682027701}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e9c5efb0fd7e74bf690e9d10c39b93e4, type: 3}
+  m_Script: {fileID: 11500000, guid: bcd8cddd7a505453bb5e7fb4e5133b3f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   level: 3
@@ -1269,7 +1269,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 700979493}
-        m_TargetAssemblyTypeName: LevelButton, MyProject
+        m_TargetAssemblyTypeName: LevelSelectButton, MyProject
         m_MethodName: OnClicked
         m_Mode: 1
         m_Arguments:
@@ -1327,7 +1327,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 700979488}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e9c5efb0fd7e74bf690e9d10c39b93e4, type: 3}
+  m_Script: {fileID: 11500000, guid: bcd8cddd7a505453bb5e7fb4e5133b3f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   level: 0
@@ -1582,8 +1582,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e238b3eec48a3402387ff3517f2037ed, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  panelsSize: 5
-  panelUI: {fileID: 7317563593713351603, guid: cfa84b6ba7a4d40b4b3e3889b97e8c51, type: 3}
+  panelDim: 5
+  panelUIPrefab: {fileID: 7317563593713351603, guid: cfa84b6ba7a4d40b4b3e3889b97e8c51, type: 3}
 --- !u!114 &951134546
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2124,7 +2124,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 01349b6476372458db6610e42f9beb8d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  levelButton:
+  levelButtons:
   - {fileID: 700979493}
   - {fileID: 249260005}
   - {fileID: 1982114881}
@@ -3017,7 +3017,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 1982114881}
-        m_TargetAssemblyTypeName: LevelButton, MyProject
+        m_TargetAssemblyTypeName: LevelSelectButton, MyProject
         m_MethodName: OnClicked
         m_Mode: 1
         m_Arguments:
@@ -3075,7 +3075,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 1982114876}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e9c5efb0fd7e74bf690e9d10c39b93e4, type: 3}
+  m_Script: {fileID: 11500000, guid: bcd8cddd7a505453bb5e7fb4e5133b3f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   level: 2

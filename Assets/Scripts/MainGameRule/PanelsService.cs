@@ -4,22 +4,27 @@ using UnityEngine;
 
 public class PanelsService : PanelInterface
 {
-    private readonly int panelSize;
+    private readonly int panelDim;
     private Panels panels;
     private List<bool> question;
     public PanelsService(int panelSize, List<bool> question) {
-        this.panelSize = panelSize;
+        this.panelDim = panelSize;
         this.question = new List<bool>();
-        foreach (bool state in question) {
-            this.question.Add(state);
-        }
-        panels = new Panels(question);
+        SetQuestion(question);
     }
     public override void OnClicked(Vector2Int pos) {
         List<int> changedPoint = CalcChangedIndex(pos);
         foreach (var point in changedPoint) {
             panels.ReverseAt(point);
         }
+        Notify();
+    }
+    public override void SetQuestion(List<bool> question) {
+        this.question = new List<bool>();
+        foreach (bool state in question) {
+            this.question.Add(state);
+        }
+        panels = new Panels(question);
         Notify();
     }
     public override void ResetQuestion() {
@@ -32,11 +37,6 @@ public class PanelsService : PanelInterface
     public override bool IsCleared() {
         return panels.IsAllTrue();
     }
-    private void Notify() {
-        foreach (var observer in observers) {
-            observer.Display(this);
-        }
-    }
     private List<int> CalcChangedIndex(Vector2Int pos) {
         List<int> ans = new List<int>();
         List<Vector2Int> mutation = new List<Vector2Int>() { Vector2Int.zero, Vector2Int.up, Vector2Int.left, Vector2Int.right, Vector2Int.down };
@@ -47,11 +47,11 @@ public class PanelsService : PanelInterface
         return ans;
     }
     private int Position2Index(Vector2Int pos) {
-        return pos.x + pos.y * panelSize;
+        return pos.x + pos.y * panelDim;
     }
     private bool IsOutOfRange(Vector2Int pos) {
-        if (pos.x < 0 || panelSize <= pos.x) { return true; }
-        if (pos.y < 0 || panelSize <= pos.y) { return true; }
+        if (pos.x < 0 || panelDim <= pos.x) { return true; }
+        if (pos.y < 0 || panelDim <= pos.y) { return true; }
         return false;
     }
 }
