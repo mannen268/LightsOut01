@@ -4,11 +4,11 @@ using UnityEngine;
 
 public class PanelsService : PanelInterface
 {
-    private readonly int panelSize;
+    private readonly int panelDim;
     private Panels panels;
     private List<bool> question;
     public PanelsService(int panelSize, List<bool> question) {
-        this.panelSize = panelSize;
+        this.panelDim = panelSize;
         this.question = new List<bool>();
         SetQuestion(question);
     }
@@ -47,11 +47,11 @@ public class PanelsService : PanelInterface
         return ans;
     }
     private int Position2Index(Vector2Int pos) {
-        return pos.x + pos.y * panelSize;
+        return pos.x + pos.y * panelDim;
     }
     private bool IsOutOfRange(Vector2Int pos) {
-        if (pos.x < 0 || panelSize <= pos.x) { return true; }
-        if (pos.y < 0 || panelSize <= pos.y) { return true; }
+        if (pos.x < 0 || panelDim <= pos.x) { return true; }
+        if (pos.y < 0 || panelDim <= pos.y) { return true; }
         return false;
     }
 }
