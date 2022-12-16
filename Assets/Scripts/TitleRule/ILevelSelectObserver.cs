@@ -4,5 +4,5 @@ using UnityEngine;
 
 public interface ILevelSelectObserver
 {
-    public void Display(LevelSelectButton.Level level);
+    public void Display(IQuestionGenerator.Level level);
 }

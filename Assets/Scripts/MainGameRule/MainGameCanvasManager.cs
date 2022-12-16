@@ -14,11 +14,12 @@ public class MainGameCanvasManager : MonoBehaviour, ILevelSelectObserver, IPanel
     private GameObject returnButton;
     private PanelFactory panelFactory;
     private PanelInterface panelInterface;
-    private QuestionGeneratorFromFile questionGenerator;
-    private LevelSelectButton.Level level = LevelSelectButton.Level.EASY;
+    private IQuestionGenerator questionGenerator;
+    private IQuestionGenerator.Level level = IQuestionGenerator.Level.VELY_EASY;
     void Awake() {
         // Generate Question
-        questionGenerator = new QuestionGeneratorFromFile();
+        questionGenerator = new QuestionGeneratorAutomatic(5);
+        //questionGenerator = new QuestionGeneratorFromFile();
         List<bool> question = questionGenerator.GetQuestion(level);
         // Setup Panels
         panelFactory = GetComponent<PanelFactory>();
@@ -35,7 +36,7 @@ public class MainGameCanvasManager : MonoBehaviour, ILevelSelectObserver, IPanel
         List<bool> question = questionGenerator.GetQuestion(level);
         panelInterface.SetQuestion(question);
     }
-    public void Display(LevelSelectButton.Level level) {
+    public void Display(IQuestionGenerator.Level level) {
         this.level = level;
         gameObject.SetActive(true);
     }

@@ -15,7 +15,7 @@ public class TitleManager : MonoBehaviour, ILevelSelectObserver, IReturnTitleBut
             button.AddObserver(mainGameCanvas.GetComponent<ILevelSelectObserver>());
         }
     }
-    public void Display(LevelSelectButton.Level level) {
+    public void Display(IQuestionGenerator.Level level) {
         gameObject.SetActive(false);
     }
     public void Display(IReturnTitleButton returnTitleButton) {

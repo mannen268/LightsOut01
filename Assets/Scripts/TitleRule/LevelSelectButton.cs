@@ -4,15 +4,8 @@ using UnityEngine;
 
 public class LevelSelectButton : MonoBehaviour
 {
-    public enum Level {
-        VERY_EASY,
-        EASY,
-        NORMAL,
-        HARD,
-        VERY_HARD
-    }
     [SerializeField]
-    private Level level;
+    private IQuestionGenerator.Level level;
     private List<ILevelSelectObserver> observers;
     void Awake() {
         observers = new List<ILevelSelectObserver>();
