@@ -16,19 +16,25 @@ public class QuestionGeneratorAutomatic : IQuestionGenerator
             question.Add(true);
         }
         Panels panels = new Panels(question);
-        List<int> points = new List<int>();
-        int idx = 0;
-        while (idx < 6 + (int)level) {
-            Vector2Int point = new Vector2Int(Random.Range(0, panelDim), Random.Range(0, panelDim));
-            if (points.Contains(selector.Position2Index(point))) { continue; };
-            Debug.Log(idx + " : " + selector.Position2Index(point));
-            List<int> changedIndex = selector.GetChangedIndex(point);
-            foreach (var index in changedIndex) {
+        List<Vector2Int> points = GetRandomPositionList(6 + (int)level);
+        foreach (var point in points) {
+            List<int> changedIndexes = selector.GetChangedIndex(point);
+            foreach (var index in changedIndexes) {
                 panels.ReverseAt(index);
             }
-            points.Add(selector.Position2Index(point));
-            idx++;
         }
         return panels.ToList();
+    }
+    private List<Vector2Int> GetRandomPositionList(int elemCount) {
+        List<Vector2Int> points = new List<Vector2Int>();
+        int i = 0;
+        while (i < elemCount) {
+            Vector2Int point = new Vector2Int(Random.Range(0, panelDim), Random.Range(0, panelDim));
+            if (points.Contains(point)) { continue; }
+            points.Add(point);
+            Debug.Log(selector.Position2Index(point));
+            i++;
+        }
+        return points;
     }
 }
