@@ -5,7 +5,7 @@ using System;
 using System.IO;
 using System.Text;
 
-public class QuestionGeneratorFromFile
+public class QuestionGeneratorFromFile : IQuestionGenerator
 {
     private readonly List<string> questionPathDict;
     public QuestionGeneratorFromFile() {
@@ -17,7 +17,7 @@ public class QuestionGeneratorFromFile
             "./question05.txt",
         };
     }
-    public List<bool> GetQuestion(LevelSelectButton.Level level) {
+    public List<bool> GetQuestion(IQuestionGenerator.Level level) {
         List<bool> question = new List<bool>();
         var lines = File.ReadLines(questionPathDict[(int)level], Encoding.UTF8);
         // TODO: よりスマートに書ける方法を検討する

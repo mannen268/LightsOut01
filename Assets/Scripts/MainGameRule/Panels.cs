@@ -27,8 +27,15 @@ public class Panels
         panels[index] = !panels[index];
         return true;
     }
+    public List<bool> ToList() {
+        List<bool> panelList = new List<bool>();
+        foreach (var panel in panels) {
+            panelList.Add(panel);
+        }
+        return panelList;
+    }
     private bool IsOutOfRange(int index) {
-        if (index < 0 || index >+ panels.Count) { return true; }
+        if (index < 0 || index >= panels.Count) { return true; }
         return false;
     }
 }

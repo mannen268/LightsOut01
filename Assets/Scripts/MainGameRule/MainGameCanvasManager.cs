@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class MainGameCanvasManager : MonoBehaviour, ILevelSelectObserver, IPanelOutput, IReturnTitleButtonObserver
+public class MainGameCanvasManager : MonoBehaviour, IQuestionParamSetterObserver, IPanelOutput, IReturnTitleButtonObserver
 {
     [SerializeField]
     private GameObject titleCanvas;
@@ -14,12 +14,12 @@ public class MainGameCanvasManager : MonoBehaviour, ILevelSelectObserver, IPanel
     private GameObject returnButton;
     private PanelFactory panelFactory;
     private PanelInterface panelInterface;
-    private QuestionGeneratorFromFile questionGenerator;
-    private LevelSelectButton.Level level = LevelSelectButton.Level.EASY;
+    private Questioner questioner;
+    private QuestionSettings questionSettings;
     void Awake() {
         // Generate Question
-        questionGenerator = new QuestionGeneratorFromFile();
-        List<bool> question = questionGenerator.GetQuestion(level);
+        questioner = new Questioner(5);
+        List<bool> question = questioner.GetQuestion(questionSettings);
         // Setup Panels
         panelFactory = GetComponent<PanelFactory>();
         panelFactory.CreatePanelUI();
@@ -32,11 +32,11 @@ public class MainGameCanvasManager : MonoBehaviour, ILevelSelectObserver, IPanel
         returnButton.GetComponent<IReturnTitleButton>().AddObserver(titleCanvas.GetComponent<IReturnTitleButtonObserver>());
     }
     void OnEnable() {
-        List<bool> question = questionGenerator.GetQuestion(level);
+        List<bool> question = questioner.GetQuestion(questionSettings);
         panelInterface.SetQuestion(question);
     }
-    public void Display(LevelSelectButton.Level level) {
-        this.level = level;
+    public void Display(AbstractQuestionParamSetter paramSetter) {
+        questionSettings = paramSetter.GetQuestionSettings();
         gameObject.SetActive(true);
     }
     public void Display(PanelInterface panelInterface) {
