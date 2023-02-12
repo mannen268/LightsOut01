@@ -2,22 +2,25 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class TitleManager : MonoBehaviour, ILevelSelectorObserver, IReturnTitleButtonObserver
+public class TitleManager : MonoBehaviour, IQuestionParamSetterObserver, IReturnTitleButtonObserver
 {
     [SerializeField]
-    private List<LevelButton> levelButton;
+    private List<LevelSelectButton> levelButtons;
+    [SerializeField]
+    private ModeSelectDropdown modeDoropdown;
     [SerializeField]
     private GameObject mainGameCanvas;
     void Start()
     {
-        LevelSelector levelSelector = new LevelSelector();
-        levelSelector.AddObserver(this);
-        levelSelector.AddObserver(mainGameCanvas.GetComponent<ILevelSelectorObserver>());
-        foreach (var button in levelButton) {
-            button.GetComponent<LevelButton>().Init(levelSelector);
+        QuestionParamSetter paramSetter = new QuestionParamSetter();
+        paramSetter.AddObserver(this);
+        paramSetter.AddObserver(mainGameCanvas.GetComponent<IQuestionParamSetterObserver>());
+        foreach (var button in levelButtons) {
+            button.AddObserver(paramSetter);
         }
+        modeDoropdown.AddObserver(paramSetter);
     }
-    public void Display(AbstractLevelSelector levelSelector) {
+    public void Display(AbstractQuestionParamSetter paramSetter) {
         gameObject.SetActive(false);
     }
     public void Display(IReturnTitleButton returnTitleButton) {

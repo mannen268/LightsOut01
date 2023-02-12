@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class MainGameCanvasManager : MonoBehaviour, ILevelSelectorObserver, IPanelOutput, IReturnTitleButtonObserver
+public class MainGameCanvasManager : MonoBehaviour, IQuestionParamSetterObserver, IPanelOutput, IReturnTitleButtonObserver
 {
     [SerializeField]
     private GameObject titleCanvas;
@@ -12,18 +12,31 @@ public class MainGameCanvasManager : MonoBehaviour, ILevelSelectorObserver, IPan
     private GameObject resetButton;
     [SerializeField]
     private GameObject returnButton;
+    private PanelFactory panelFactory;
     private PanelInterface panelInterface;
-    void OnEnable() {
+    private Questioner questioner;
+    private QuestionSettings questionSettings;
+    void Awake() {
+        // Generate Question
+        questioner = new Questioner(5);
+        List<bool> question = questioner.GetQuestion(questionSettings);
+        // Setup Panels
+        panelFactory = GetComponent<PanelFactory>();
+        panelFactory.CreatePanelUI();
+        panelInterface = panelFactory.CreatePanelService(question);
         panelInterface.AddObserver(this);
         panelInterface.AddObserver(ClearCanvas.GetComponent<IPanelOutput>());
-    }
-    void Start() {
+        // Setup UI button
+        resetButton.GetComponent<ResetButton>().Init(panelInterface);
         returnButton.GetComponent<IReturnTitleButton>().AddObserver(this);
         returnButton.GetComponent<IReturnTitleButton>().AddObserver(titleCanvas.GetComponent<IReturnTitleButtonObserver>());
     }
-    public void Display(AbstractLevelSelector levelSelector) {
-        panelInterface = this.GetComponent<PanelFactory>().CreatePanels(levelSelector.GetQuestionPath());
-        resetButton.GetComponent<ResetButton>().Init(panelInterface);
+    void OnEnable() {
+        List<bool> question = questioner.GetQuestion(questionSettings);
+        panelInterface.SetQuestion(question);
+    }
+    public void Display(AbstractQuestionParamSetter paramSetter) {
+        questionSettings = paramSetter.GetQuestionSettings();
         gameObject.SetActive(true);
     }
     public void Display(PanelInterface panelInterface) {
