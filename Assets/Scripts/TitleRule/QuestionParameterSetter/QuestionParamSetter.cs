@@ -7,7 +7,7 @@ public class QuestionParamSetter : AbstractQuestionParamSetter, ILevelSelectObse
     private IQuestionGenerator.Level level;
     private Questioner.Mode mode;
     public QuestionParamSetter() {
-        level = IQuestionGenerator.Level.VELY_EASY;
+        level = IQuestionGenerator.Level.VERY_EASY;
     }
     public void Display(IQuestionGenerator.Level level) {
         this.level = level;

@@ -5,11 +5,11 @@ using UnityEngine;
 public interface IQuestionGenerator
 {
     enum Level {
-        VELY_EASY,
+        VERY_EASY,
         EASY,
         NORMAL,
         HARD,
-        VELY_HARD
+        VERY_HARD
     }
     public List<bool> GetQuestion(Level level);
 }
