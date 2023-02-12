@@ -16,18 +16,24 @@ public class TestPanelSelector
     public void TestGetChangedIndexWithinRange() {
         List<int> expected = new List<int>() { 12, 17, 7, 11, 13};
         PanelSelector selector = new PanelSelector(5);
-        List<int> ans = selector.GetChangedIndex(new Vector2Int(2, 2));
-        for (int i = 0; i < ans.Count; i++) {
-            Assert.That(ans[i], Is.EqualTo(expected[i]));
+        List<int> indexes = selector.GetChangedIndex(new Vector2Int(2, 2));
+        for (int i = 0; i < indexes.Count; i++) {
+            Assert.That(indexes[i], Is.EqualTo(expected[i]));
         }
     }
     [Test]
-    public void TestGetChangedIndexOutRange() {
+    public void TestGetChangedIndexCorner() {
         List<int> expected = new List<int>() { 24, 19, 23};
         PanelSelector selector = new PanelSelector(5);
-        List<int> ans = selector.GetChangedIndex(new Vector2Int(4, 4));
-        for (int i = 0; i < ans.Count; i++) {
-            Assert.That(ans[i], Is.EqualTo(expected[i]));
+        List<int> indexes = selector.GetChangedIndex(new Vector2Int(4, 4));
+        for (int i = 0; i < indexes.Count; i++) {
+            Assert.That(indexes[i], Is.EqualTo(expected[i]));
         }
+    }
+    [Test]
+    public void TestGetChangedIndexOutOfRange() {
+        PanelSelector selector = new PanelSelector(5);
+        List<int> indexes = selector.GetChangedIndex(new Vector2Int(5, 5));
+        Assert.That(indexes.Count, Is.EqualTo(0));
     }
 }
